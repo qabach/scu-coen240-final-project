@@ -29,7 +29,7 @@ import re  #for regex to remove punctuations
 import numpy as np
 from utils import stopwords
 from nltk.tokenize import sent_tokenize, word_tokenize # for word and sentence tokennizing
-from nltk.stem import PorterStemmer # for stemming
+from nltk.stem import WordNetLemmatizer # for lemmatization 
 
 
 
@@ -47,9 +47,10 @@ def procressData(directory):
     vocab_set           = set() # vocabulary
     docu_names          = [] # list of all document names
     bow_list            = [] # bag of words; this will be used to construct the incidence matrix afterward
+    content_list        = [] # list that contains the files content for TF-IDF computation afterward
     
     # initialize stem
-    ps =  PorterStemmer()
+    word_lem =  WordNetLemmatizer()
 
     # walk through the entire directory
     print('Loading data...')
@@ -75,8 +76,8 @@ def procressData(directory):
                     for word in line_list:
                         word = str(word).lower()
                         word = re.sub(r'[^\w\s]', '', word)         # remove puntuations with regex
-                        word = ps.stem(word)                        # stemming the word
-                        if word not in stopwords and word != '':    #check if is a stop word
+                        word = word_lem.lemmatize(word)             # lemmatizing the word
+                        if word not in stopwords and word != '':    # check if is a stop word or empty
                             count_of_words += 1
                             vocab_set.add(word)
                             if word not in vocab_dictionary.keys():
@@ -94,21 +95,27 @@ def procressData(directory):
             bow_list.append(tmp_dict)
             # read file again to count sentences
             with open(os.path.join(subdir,filename),'rb') as input_file:
-                entire_file = input_file.read() # read the whole file as once
                 # to skip files  that cannot decode
                 # i.e. to avoid unicode decode error below
                 # UnicodeDecodeError: 'utf-8' codec can't decode byte 0xFF in position n: invalid start byte
                 try:
-                    count_of_sentences += len(sent_tokenize(entire_file.decode()))
+                    entire_file = input_file.read().decode() # read the whole file as once
                 except UnicodeDecodeError:
                     continue
+                # some clean up
+                entire_file = entire_file.lower()
+                entire_file = entire_file.replace("\n",'')
+                content_list.append(entire_file)
+           
+                count_of_sentences += len(sent_tokenize(entire_file))
+                
             input_file.close()
 
     count_of_unique_words = len(vocab_set)
     stats_set = (count_of_documents, count_of_sentences, count_of_words ,count_of_unique_words)
     
     print('\n' + 'Completed! ' + str(count_of_documents) + ' files loaded')
-    return stats_set, vocab_dictionary, vocab_set, docu_names, bow_list
+    return stats_set, vocab_dictionary, vocab_set, docu_names, bow_list, content_list 
                         
 
 if __name__ == "__main__":
@@ -116,7 +123,7 @@ if __name__ == "__main__":
             os.makedirs('./npy/')
             
     input_directory = './20news-18828' # input dataset folder
-    stat_set, v_dict, v_set,docu_names, bow_list = procressData(input_directory)
+    stat_set, v_dict, v_set,docu_names, bow_list, content_list  = procressData(input_directory)
     stat_dict = {'number of documents'      : list(stat_set)[0],
                  'number of sentences'      : list(stat_set)[1],
                  'number of words'          : list(stat_set)[2],
@@ -124,15 +131,17 @@ if __name__ == "__main__":
     
     np.save('./npy/vocabulary_dict.npy',v_dict)
     np.save('./npy/stats_dict.npy', stat_dict)
-    np.save('./npy/vocabulary_set.npy',v_set)
+    np.save('./npy/vocabulary_set.npy',list(v_set))
     np.save('./npy/docu_names.npy',docu_names)
     np.save('./npy/bow_list.npy',bow_list)
+    np.save('./npy/content_list.npy',content_list)
     print ('Saved: '                + '\n' +
            '-vocabulary set'        + '\n' +
            '-vocabulary dictionary' + '\n' +
            '-statistics set'        + '\n' +
            '-document names list'   + '\n' +
            '-bag of words list'     + '\n' +
+           '-content list'          + '\n' +
            'to npy')
     
     
