@@ -15,9 +15,12 @@ NOTICE: due to the hardware constraints the documents are divided into batch of 
 
 Author hardware configuration:
     OS:         macOS Catalina
-    Processor:  2.5Ghz Quad-Core Intel Cire i7
+    Processor:  2.5Ghz Quad-Core Intel Core i7
     Memory:     16 GB 1600 MHz DDR3
-    
+
+
+
+*** ONLY RUN THIS FILE IF YOU WANT TO SEE THE TF-IDF TABLES IN CSV FORMAT ***
 """
 
 import math
