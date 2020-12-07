@@ -11,9 +11,8 @@ Anh Truong
 
 
 By running thi file: 
-    - a table of n topics will be displayed in output (n = 8 in this script and it can be changed)
-    - two html files will be saved to a folder named LDA under the name lda-bow.html and lda-tfidf.html
-    - two html files is an interactive visualization of the lda models trained by bags of words and tf-idf
+    - 2 plots will be produced and saved to Doc2vec folder 
+    - these plots are doc2vec with distributed bags of words and doc2vec with distributed memory 
     
     
 *** NOTICE ***: this script will dowload the 20 news group dataset from sklearn and perform processing directly here before the lda models. 
