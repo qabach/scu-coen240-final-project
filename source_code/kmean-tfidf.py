@@ -26,6 +26,8 @@ from sklearn.datasets import fetch_20newsgroups
 from sklearn.feature_extraction.text import TfidfVectorizer
 from sklearn.cluster import KMeans
 import os
+import matplotlib.pyplot as plt
+
 
 
 if __name__ == '__main__':
@@ -41,7 +43,7 @@ if __name__ == '__main__':
 
     print('KMean with TF-IDF in progress')
     print('...')
-    vectorizer = TfidfVectorizer(max_df=0.5,min_df=2,stop_words='english')
+    vectorizer = TfidfVectorizer(max_df=0.5,min_df=0.05,stop_words='english')
 
     X = vectorizer.fit_transform(newsgroups_train.data)
     true_k = 12
@@ -67,3 +69,27 @@ if __name__ == '__main__':
     
     out_file.close()
     print('Saved kmean-tfidf to KMean folder...')
+    
+    # plot
+    X = X.toarray()
+    y_km = model.fit_predict(X)
+    
+    # plot the 3 clusters
+    for i in range (0,true_k):
+        plt.scatter(
+           X[y_km == i, 0], X[y_km == i, 1],
+           s=50, c='lightgreen',
+           marker='s', edgecolor='black',
+           label='cluster ' + str(i)
+        )
+
+    # plot the centroids
+    plt.scatter(
+        model.cluster_centers_[:, 0], model.cluster_centers_[:, 1],
+        s=250, marker='*',
+        c='red', edgecolor='black',
+        label='centroids'
+        )
+    plt.legend(scatterpoints=1)
+    plt.grid()
+    plt.savefig('./KMeans/kmeans_tfidf.png')
