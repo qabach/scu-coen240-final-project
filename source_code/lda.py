@@ -31,6 +31,7 @@ import pyLDAvis.gensim
 from nltk.stem import WordNetLemmatizer, SnowballStemmer
 from sklearn.datasets import fetch_20newsgroups
 from gensim import models
+import numpy as np
 
 
 
@@ -59,10 +60,16 @@ if __name__ == '__main__':
     # initialize empty list to hold all docs 
     processed_docs = []
     
-    # process the docs
+     # process the docs
+    print('Loading dataset.....')
+    for idx in range(0,len(newsgroups_train.data)):
+        print(str(newsgroups_train.filenames[idx]))
+        processed_docs.append(preprocess(newsgroups_train.data[idx]))
+        
+    print()
+    print('Dataset loaded....')
+    print('...')
     
-    for doc in newsgroups_train.data:
-        processed_docs.append(preprocess(doc))
             
     dictionary = gensim.corpora.Dictionary(processed_docs)
 
@@ -73,6 +80,9 @@ if __name__ == '__main__':
     # -words appearing in more than 10% of all documents
     dictionary.filter_extremes(no_below=15, no_above=0.1, keep_n= 100000)
     
+    
+    print ('LDA training with bags of words in progress...')
+    print('...')
     # Create a bag or word for each document 
     bow_corpus = [dictionary.doc2bow(doc) for doc in processed_docs]
 
@@ -82,9 +92,13 @@ if __name__ == '__main__':
                                    num_topics = 8, 
                                    id2word = dictionary,                                    
                                    passes = 10,
-                                   workers = 2)
-
-
+                                   workers = 2,
+                                   minimum_probability=0.0)
+    
+    np.save('./npy/lda_bow_topic_distribution.npy',lda_model_bow[bow_corpus])
+    print('Saved LDA bags of words topic distribution to npy folder...')
+    print('...')
+    
     print('**** LDA MODEL USING BAGS OF WORDS *****')
     # Print out the words in each topic and its weight 
     for idx, topic in lda_model_bow.print_topics(-1):
@@ -98,18 +112,28 @@ if __name__ == '__main__':
         
     # save visualization to html
     pyLDAvis.save_html(lda_bow_vis, './LDA/lda-bow.html')
-    
+    print('...')
+    print('Saved lda-bagofwords visualization to LDA folder')
+    print('...')
     
     # performing tf-idf from bags of words
     
     tfidf = models.TfidfModel(bow_corpus)
     tfidf_corpus = tfidf[bow_corpus]
     
+    
+    print ('LDA training with TF-IDF in progress...')
+    print('...')
     lda_model_tfidf =  gensim.models.LdaMulticore(tfidf_corpus, 
                                    num_topics = 8, 
                                    id2word = dictionary,                                    
                                    passes = 10,
-                                   workers = 2)
+                                   workers = 2,
+                                   minimum_probability=0.0)
+    
+    np.save('./npy/lda_tfidf_topic_distribution.npy',lda_model_tfidf[tfidf_corpus])
+    print('Saved LDA TF-IDF topic distribution to npy folder...')
+    print('...')
     
     print('**** LDA MODEL USING TF-IDF  *****')
     # Print out the words in each topic and its weight 
@@ -124,3 +148,5 @@ if __name__ == '__main__':
         
     # save visualization to html
     pyLDAvis.save_html(lda_tfidf_vis, './LDA/lda-tfidf.html')
+    print('...')
+    print('Saved lda-tfidf visualization to LDA folder')
