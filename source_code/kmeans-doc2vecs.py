@@ -15,6 +15,7 @@ By running thi file:
     - true_k value can be modify for experimenting 
     - a txt file will be saved with the kmeans clustering info 
     - a plot will be saved to KMeans folder 
+    - a grouping of clusters will be shown in output 
     
     
 *** NOTICE ***: this script will dowload the 20 news group dataset from sklearn and perform processing directly here before the lda models. 
