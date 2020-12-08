@@ -134,7 +134,6 @@ if __name__ == "__main__":
     np.save('./npy/vocabulary_set.npy',list(v_set))
     np.save('./npy/docu_names.npy',docu_names)
     np.save('./npy/bow_list.npy',bow_list)
-    np.save('./npy/content_list.npy',content_list)
     print ('Saved: '                + '\n' +
            '-vocabulary set'        + '\n' +
            '-vocabulary dictionary' + '\n' +
