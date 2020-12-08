@@ -31,11 +31,6 @@ import pandas as pd
 from sklearn.manifold import TSNE
 import numpy as np
 
-
-
-
-
-
 # Tokenize and lemmatize
 
 def lemmatize_stemming(text):
