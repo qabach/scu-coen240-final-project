@@ -11,7 +11,7 @@ Anh Truong
 By running this file, the weight matrix will be contructed based on TF-IDF algorithm.
 NOTICE: due to the hardware constraints the documents are divided into batch of 5000 for processing.
 
-*** ATTENTION *** this program is not optimized. Therefore, running this script might take more than 20 mininutes - depends on the hardware. Please refer to the TF-IDF folder for the generated matrices. If folder does not exist, this script must be ran.
+*** ATTENTION *** this program is not optimized. Therefore, running this script might take more than 50 mininutes - depends on the hardware. Please refer to the TF-IDF folder for the generated matrices. If folder does not exist, this script must be ran.
 
 Author hardware configuration:
     OS:         macOS Catalina
