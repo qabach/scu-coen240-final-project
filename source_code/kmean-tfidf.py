@@ -37,7 +37,7 @@ if __name__ == '__main__':
     
     
     # load data 
-    newsgroups_train = fetch_20newsgroups(subset='train', shuffle = True)    
+    newsgroups_train = fetch_20newsgroups(subset='train', remove=('headers', 'footers', 'quotes'), shuffle = True)    
     print('Dataset loaded...')
     print('...')
 
