@@ -72,7 +72,7 @@ if __name__ == '__main__':
    
     # train doc2vec model with dm = 0 i.e. training algorithm with distributed  bag of words 
     model_dbow = Doc2Vec(tagged_data, 
-                   vector_size=100, 
+                   vector_size=89, 
                    window=2,
                    min_count=1,
                    workers=4,
@@ -80,7 +80,7 @@ if __name__ == '__main__':
                    dm=0)
     # train doc2vec model with dm = 1 i.e. training algorithm with distributed memory 
     model_dm = Doc2Vec(tagged_data, 
-                   vector_size=100, 
+                   vector_size=89, 
                    window=2,
                    min_count=1,
                    workers=4,
