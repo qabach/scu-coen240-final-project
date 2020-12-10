@@ -13,6 +13,8 @@ This is Part 8 of the Final Project
 
 
 By running thi file: 
+    - the program will implement multinominal naieve bayesian classification on the dataset from tf-idf representation 
+    - the performance scores will be shown in output 
     
     
     
