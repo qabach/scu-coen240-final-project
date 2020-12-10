@@ -9,8 +9,6 @@ This repo is the final project for COEN 240 - Machine Learning at Santa Clara Un
 - ntlk 
     nltk.download('stopwords')
     nltk.download('punkt')
-- umap-learn
-	- conda install pandas matplotlib datashader bokeh holoviews colorcet
 
 ## Input:
 - Please download the data at http://qwone.com/~jason/20Newsgroups/20news-18828.tar.gz and extract the 20news-18828 folder to the project folder
