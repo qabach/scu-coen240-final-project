@@ -172,7 +172,7 @@ if __name__ == "__main__":
     ax.bar(sorted_dict.keys(), sorted_dict.values())
     
     ax.set_ylabel('count of word')
-    
+
     # customize tick labels
     ax.tick_params(axis='x', rotation=265,labelsize=5)
     plt.savefig('word_count_plot.png')
