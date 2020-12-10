@@ -22,6 +22,8 @@ in the npy format
 
 These files will be in the folder npy.
 
+- this program also shows in output some statistics of the dataset 
+
 
 """
 import os
@@ -112,7 +114,7 @@ def procressData(directory):
             input_file.close()
 
     count_of_unique_words = len(vocab_set)
-    stats_set = (count_of_documents, count_of_sentences, count_of_words ,count_of_unique_words)
+    stats_set = [count_of_documents, count_of_sentences, count_of_words ,count_of_unique_words]
     
     print('\n' + 'Completed! ' + str(count_of_documents) + ' files loaded')
     return stats_set, vocab_dictionary, vocab_set, docu_names, bow_list, content_list 
@@ -144,6 +146,16 @@ if __name__ == "__main__":
            '-bag of words list'     + '\n' +
            '-content list'          + '\n' +
            'to npy')
+    
+    print('Total number of documents: ', stat_set[0])
+    print('Total number of sentences: ', stat_set[1])
+    print('Total number of words: ', stat_set[2])
+    print('Total number of unique words: ', stat_set[3])
+    print('Number of words per sentence: ', stat_set[2] / stat_set[1])
+    
+    
+    
+    
     
     
 
