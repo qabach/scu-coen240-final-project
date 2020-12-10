@@ -23,15 +23,19 @@ in the npy format
 These files will be in the folder npy.
 
 - this program also shows in output some statistics of the dataset 
+- a plot of the count of the first 100 words will also be saved to current directory and shown in plots tab
+
 
 
 """
 import os
+import operator 
 import re  #for regex to remove punctuations
 import numpy as np
 from utils import stopwords
 from nltk.tokenize import sent_tokenize, word_tokenize # for word and sentence tokennizing
 from nltk.stem import WordNetLemmatizer # for lemmatization 
+import matplotlib.pyplot as plt
 
 
 
@@ -153,10 +157,27 @@ if __name__ == "__main__":
     print('Total number of unique words: ', stat_set[3])
     print('Number of words per sentence: ', stat_set[2] / stat_set[1])
     
+ 
+    print('...')
+    print('Plotting in progress...')
+    print('...')
+    # for plotting purpose 
+    sorted_dict = dict(sorted(v_dict.items(), key=operator.itemgetter(1),reverse=True))
     
+    # slice the first 10000 words for ploting 
+    sorted_dict = dict(list(sorted_dict.items())[0:100])
     
+    fig,ax = plt.subplots(1)
+
+    ax.bar(sorted_dict.keys(), sorted_dict.values())
     
+    ax.set_ylabel('count of word')
     
+    # customize tick labels
+    ax.tick_params(axis='x', rotation=265,labelsize=5)
+    plt.savefig('word_count_plot.png')
+    plt.show()
+    print('Saved plot to current directory...')
     
 
     
