@@ -18,7 +18,9 @@ Author hardware configuration:
     Processor:  2.5Ghz Quad-Core Intel Core i7
     Memory:     16 GB 1600 MHz DDR3
 
-
+!!! before running this file: 
+    - run importData.py and uncomment line 142 to generate content_list
+    - if encounter error due to exceeding memory, please add the provided ./utils/content_list.npy to folder npy 
 
 *** ONLY RUN THIS FILE IF YOU WANT TO SEE THE TF-IDF TABLES IN CSV FORMAT ***
 """
