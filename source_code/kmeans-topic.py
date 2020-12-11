@@ -30,7 +30,7 @@ if __name__ == '__main__':
         os.makedirs('./KMeans/')
            
     # import topic distibution by lda-tfidf 
-    topic_dist = np.load('./npy/lda_tfidf_topic_distribution.npy')
+    topic_dist = np.load('./npy/lda_tfidf_topic_distribution_20k.npy')
     print('...')
     print('Loaded topic distribution matrix')
     print('...')
@@ -40,14 +40,13 @@ if __name__ == '__main__':
 
 
     # numbers of clusters 
-    true_k = 8
+    true_k = 20
     model = KMeans(n_clusters=true_k, init='k-means++', max_iter=100, n_init=1)
     
-    new_array = topic_dist[:,:,1].transpose()
+    new_array = topic_dist[:,:,1]
     
     M = model.fit(new_array)
     
-
  
     #PCA
     pca = PCA(n_components=2).fit(new_array)
