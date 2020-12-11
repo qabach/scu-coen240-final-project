@@ -11,6 +11,7 @@ This repo is the final project for COEN 240 - Machine Learning at Santa Clara Un
     nltk.download('punkt')
 	nltk.download('wordnet')
 -yellobrick
+-seaborn
 
 ## Input:
 - Please download the data at http://qwone.com/~jason/20Newsgroups/20news-18828.tar.gz and extract the 20news-18828 folder to the project folder
@@ -29,7 +30,7 @@ This repo is the final project for COEN 240 - Machine Learning at Santa Clara Un
     Part 5      -`kmeans-bow.py` to perform kmeans from bags of words representation
                 -`kmeans-tfidf.py` to perform kmeans from tf-idf representation 
                 -`kmeans-doc2vec.py` to perform kmeans from doc2vec representation
-                -`kmeans-topic.py` to perform kmeans from topic distribution generated from lda 
+                -`kmeans-topic.py` to perform kmeans from topic distribution generated from lda 20,000 vocab size 
     
     Part 7      -`SVMs.py` to perform support vector machine classification for the dataset from tf-idf representation 
     
