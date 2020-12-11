@@ -26,6 +26,8 @@ from sklearn.feature_extraction.text import TfidfVectorizer
 from sklearn.metrics.cluster import normalized_mutual_info_score as nmi
 from sklearn.svm import LinearSVC
 from sklearn import metrics
+import matplotlib.pyplot as plt 
+import seaborn as sns
 
 
 if __name__ == '__main__':
@@ -94,8 +96,10 @@ if __name__ == '__main__':
     print('F-measure of SVM: ', metrics.f1_score(y_test,y_predict,average='weighted'))
     
     
+    f, ax = plt.subplots(figsize=(16, 12))
     
     
+    ax = sns.heatmap(metrics.confusion_matrix(y_test,y_predict), annot=True, cmap='Blues',annot_kws={"size":8})
     
-    
-    
+    plt.savefig('svm_confusion_matrix.png')
+    plt.show()

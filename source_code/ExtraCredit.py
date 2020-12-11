@@ -28,7 +28,8 @@ from sklearn.feature_extraction.text import TfidfVectorizer
 from sklearn.metrics.cluster import normalized_mutual_info_score as nmi
 from sklearn import metrics
 from sklearn.naive_bayes import MultinomialNB
-
+import matplotlib.pyplot as plt 
+import seaborn as sns
 
 
 if __name__ == '__main__':
@@ -95,3 +96,11 @@ if __name__ == '__main__':
     print('Precision of MNB: ', metrics.precision_score(y_test,y_predict,average='weighted'))
     print('F-measure of MNB: ', metrics.f1_score(y_test,y_predict,average='weighted'))
     
+    
+    f, ax = plt.subplots(figsize=(16, 12))
+    
+    
+    ax = sns.heatmap(metrics.confusion_matrix(y_test,y_predict), annot=True, cmap='Blues',annot_kws={"size":8})
+    
+    plt.savefig('mnb_confusion_matrix.png')
+    plt.show()
