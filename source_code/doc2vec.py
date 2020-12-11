@@ -56,12 +56,20 @@ if __name__ == '__main__':
     # initialize empty list to hold all docs 
     processed_docs = []
     
+    color_list = ['#e6194b', '#3cb44b', '#ffe119', '#4363d8', '#f58231', '#911eb4', '#46f0f0', '#f032e6', '#bcf60c', '#fabebe', '#008080', '#e6beff', '#9a6324', '#fffac8', '#800000', '#aaffc3', '#808000', '#ffd8b1', '#000075', '#808080', '#ffffff', '#000000']
+    
+    colors = []
+    for i in range(0,len(newsgroups_train.target)):
+        colors.append(color_list[newsgroups_train.target[i]])
+        
     # process the docs
     print('Loading dataset.....')
     for idx in range(0,len(newsgroups_train.data)):
         print(str(newsgroups_train.filenames[idx]))
         processed_docs.append(preprocess(newsgroups_train.data[idx]))
-    
+        
+  
+    print('...')
     print('Dataset loaded...')
     print('Set up and train Doc2Vec...')
     print('...')
@@ -105,21 +113,21 @@ if __name__ == '__main__':
     print ('...')
     tsne = TSNE(n_components=2)
     
-    # t-SNE the top 10000 documents
-    DBOW_tsne = tsne.fit_transform(model_dbow.docvecs.vectors_docs[:10000])
-    DM_tsne = tsne.fit_transform(model_dm.docvecs.vectors_docs[:10000])
+    # t-SNE 
+    DBOW_tsne = tsne.fit_transform(model_dbow.docvecs.vectors_docs[:len(newsgroups_train.target)])
+    DM_tsne = tsne.fit_transform(model_dm.docvecs.vectors_docs[:len(newsgroups_train.target)])
 
     # data frame of distributed bags of words & distributed memory 
     df_dbow = pd.DataFrame(DBOW_tsne, columns=['First Component','Second Component'])
     df_dm = pd.DataFrame(DM_tsne, columns=['First Component','Second Component'])
 
     # DBOW figureS
-    ax1 = df_dbow.plot.scatter(x = 'First Component', y='Second Component', c='DarkBlue')
+    ax1 = df_dbow.plot.scatter(x = 'First Component', y='Second Component', c=colors)
     fig1 = ax1.get_figure()
     fig1.savefig('./Doc2Vec/doc2vec_bow.png')
     
     # DM figure 
-    ax2 = df_dm.plot.scatter(x = 'First Component', y='Second Component', c='DarkBlue')
+    ax2 = df_dm.plot.scatter(x = 'First Component', y='Second Component', c=colors)
     fig2 = ax2.get_figure()
     fig2.savefig('./Doc2Vec/doc2vec_tfidf.png')
 
