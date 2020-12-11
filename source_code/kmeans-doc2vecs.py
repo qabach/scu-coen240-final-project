@@ -53,7 +53,7 @@ if __name__ == '__main__':
     d2v_model = Doc2Vec.load('./Doc2Vec/20newsgDoc2vec_DBOW_trained.model')
     
     # number of clusters 
-    true_k = 12 
+    true_k = 20 
     
     kmeans_model = KMeans (n_clusters=true_k, init='k-means++', max_iter=100, n_init=1)
     
@@ -79,13 +79,20 @@ if __name__ == '__main__':
     out_file.close()
     print('Saved kmean-doc2vec to KMean folder...')
     
+    
     #PCA
     y_predict = kmeans_model.fit_predict(d2v_model.docvecs.vectors_docs)
     pca = PCA(n_components=2).fit(d2v_model.docvecs.vectors_docs)
     datapoint = pca.transform(d2v_model.docvecs.vectors_docs)
     
+    color_list = ['#e6194b', '#3cb44b', '#ffe119', '#4363d8', '#f58231', '#911eb4', '#46f0f0', '#f032e6', '#bcf60c', '#fabebe', '#008080', '#e6beff', '#9a6324', '#fffac8', '#800000', '#aaffc3', '#808000', '#ffd8b1', '#000075', '#808080', '#ffffff', '#000000']
+    
+    colors = []
+    for i in range(0,len(datapoint)):
+        colors.append(color_list[newsgroups_train.target[i]])
+        
     plt.figure
-    plt.scatter(datapoint[:, 0], datapoint[:, 1], c='DarkBlue')
+    plt.scatter(datapoint[:, 0], datapoint[:, 1],marker='o', s=20,c=colors)
 
     # plot the centroids
     plt.scatter(

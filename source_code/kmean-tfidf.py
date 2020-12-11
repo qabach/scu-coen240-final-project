@@ -49,7 +49,7 @@ if __name__ == '__main__':
     vectorizer = TfidfVectorizer(max_df=0.5,min_df=0.05,stop_words='english')
 
     X = vectorizer.fit_transform(newsgroups_train.data)
-    true_k = 12
+    true_k = 20
 
     model = KMeans(n_clusters=true_k, init='k-means++', max_iter=100, n_init=1)
     model.fit(X)
@@ -81,16 +81,16 @@ if __name__ == '__main__':
     for i in range (0,true_k):
         plt.scatter(
            X[y_km == i, 0], X[y_km == i, 1],
-           s=50, c='lightgreen',
-           marker='s', edgecolor='black',
+           s=20,
+           marker='o',
            label='cluster ' + str(i)
         )
 
     # plot the centroids
     plt.scatter(
         model.cluster_centers_[:, 0], model.cluster_centers_[:, 1],
-        s=250, marker='*',
-        c='red', edgecolor='black',
+        s=25, marker='*',
+        c='red', edgecolor='red',
         label='centroids'
         )
     plt.legend(scatterpoints=1)
