@@ -8,6 +8,8 @@ Final Project
 Quan Bach
 Anh Truong
 
+*** Before running this script please have the dataset ready with the folder name: 20news-18828
+    if you have not downloaded the dataset please follow instructions in README.md
 
 
 By running this file, it will process all the dataset folder's  subdirectories.
