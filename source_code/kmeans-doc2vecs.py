@@ -30,6 +30,7 @@ from sklearn.feature_extraction.text import TfidfVectorizer
 import matplotlib.pyplot as plt
 from gensim.models.doc2vec import Doc2Vec
 from sklearn.decomposition import PCA
+from sklearn.metrics.cluster import normalized_mutual_info_score as nmi
 
 
 
@@ -79,7 +80,7 @@ if __name__ == '__main__':
     print('Saved kmean-doc2vec to KMean folder...')
     
     #PCA
-    l = kmeans_model.fit_predict(d2v_model.docvecs.vectors_docs)
+    y_predict = kmeans_model.fit_predict(d2v_model.docvecs.vectors_docs)
     pca = PCA(n_components=2).fit(d2v_model.docvecs.vectors_docs)
     datapoint = pca.transform(d2v_model.docvecs.vectors_docs)
     
@@ -96,3 +97,10 @@ if __name__ == '__main__':
     plt.legend(scatterpoints=1)
     plt.grid()
     plt.savefig('./KMeans/kmeans_doc2vec.png')
+    
+    # target 
+    y_target = newsgroups_train.target
+    
+    # get the NMI Score
+    print('NMI Score: ', nmi(y_target,y_predict))
+    
