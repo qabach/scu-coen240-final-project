@@ -38,7 +38,6 @@ from nltk.stem import WordNetLemmatizer # for lemmatization
 import matplotlib.pyplot as plt
 
 
-
 def procressData(directory):
     
     # initializing return stats
@@ -167,7 +166,8 @@ if __name__ == "__main__":
     # slice the first 10000 words for ploting 
     sorted_dict = dict(list(sorted_dict.items())[0:100])
     
-    fig,ax = plt.subplots(1)
+
+    fig,ax = plt.subplots(1,figsize=(8,6))
 
     ax.bar(sorted_dict.keys(), sorted_dict.values())
     

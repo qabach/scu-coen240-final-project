@@ -89,7 +89,7 @@ if __name__ == '__main__':
 
     # train LDA model with bags of words 
     lda_model_bow =  gensim.models.LdaMulticore(bow_corpus, 
-                                   num_topics = 12, 
+                                   num_topics = 20, 
                                    id2word = dictionary,                                    
                                    passes = 10,
                                    workers = 2,
@@ -125,7 +125,7 @@ if __name__ == '__main__':
     print ('LDA with 20k size vocab training with TF-IDF in progress...')
     print('...')
     lda_model_tfidf =  gensim.models.LdaMulticore(tfidf_corpus, 
-                                   num_topics = 12, 
+                                   num_topics = 20, 
                                    id2word = dictionary,                                    
                                    passes = 10,
                                    workers = 2,

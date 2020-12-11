@@ -9,6 +9,8 @@ This repo is the final project for COEN 240 - Machine Learning at Santa Clara Un
 - ntlk 
     nltk.download('stopwords')
     nltk.download('punkt')
+	nltk.download('wordnet')
+-yellobrick
 
 ## Input:
 - Please download the data at http://qwone.com/~jason/20Newsgroups/20news-18828.tar.gz and extract the 20news-18828 folder to the project folder
@@ -20,8 +22,9 @@ This repo is the final project for COEN 240 - Machine Learning at Santa Clara Un
                 -(optional) `tfidfMatrixGenerator.py` to generate the csv files for the tf-idf matrix. please follow closely instructions to run this files
     
     Part 3      -`lda.py` to perform lda on the dataset.
+				-`lda_20k.py` to perform lda on the top 20,000 words/tokens of the vocabulary
     
-    Part 4      -`doc2vec.py` to perform doc2vec on the dataset.
+    Part 4      -`doc2vec.py` to perform doc2vec on the dataset. this script will perform 2 doc2vec models based on continuous bags of words or distributed memory
     
     Part 5      -`kmeans-bow.py` to perform kmeans from bags of words representation
                 -`kmeans-tfidf.py` to perform kmeans from tf-idf representation 

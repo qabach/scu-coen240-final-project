@@ -82,10 +82,10 @@ if __name__ == '__main__':
     # plot the 12 clusters
     for i in range (0,true_k):
         plt.scatter(
-           X[y_km == i, 0], X[y_km == i, 1],
-           s=50, c='lightgreen',
-           marker='s', edgecolor='black',
-           label='cluster ' + str(i)
+            X[y_km == i, 0], X[y_km == i, 1],
+            s=50, c='lightgreen',
+            marker='s', edgecolor='black',
+            label='cluster ' + str(i)
         )
 
     # plot the centroids
