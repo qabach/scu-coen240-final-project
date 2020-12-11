@@ -36,7 +36,6 @@ from utils import stopwords
 from nltk.tokenize import sent_tokenize, word_tokenize # for word and sentence tokennizing
 from nltk.stem import WordNetLemmatizer # for lemmatization 
 import matplotlib.pyplot as plt
-from matplotlib.pyplot import figure
 
 
 def procressData(directory):
