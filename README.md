@@ -2,6 +2,7 @@
 This repo is the final project for COEN 240 - Machine Learning at Santa Clara University, Fall 2020
 
 ## Prerequisite / Installation:
+- environment.yml can be found in the utils folder 
 - Python 3.6 or install Anaconda
 - numpy
 - gensim
