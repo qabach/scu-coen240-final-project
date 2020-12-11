@@ -41,7 +41,7 @@ if __name__ == '__main__':
     labels = newsgroups_train.target
     
     # create the visualizer
-    tsne = TSNEVisualizer()
+    tsne = TSNEVisualizer(size=(1080, 720))
     tsne.fit(docs, labels)
     tsne.show(outpath="docuEmbedding.png")
     tsne.poof()
