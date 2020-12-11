@@ -21,7 +21,7 @@ This repo is the final project for COEN 240 - Machine Learning at Santa Clara Un
 ## Usage:
 - The project to be ran in the following order:
     Part 1 & 2  -`importData.py` to generate vocabulary set, vocabulary dictionary and statistics set in numpy pickle
-                -(optional) `tfidfMatrixGenerator.py` to generate the csv files for the tf-idf matrix. please follow closely instructions to run this files
+                -(optional) `tfidfMatrixGenerator.py` to generate the csv files for the tf-idf matrix. please follow closely instructions to run this files since it takes more than 60 mins to run and take up to 11GB in storage to store the file since the matrix is too large
     
     Part 3      -`lda.py` to perform lda on the dataset.
 				-`lda_20k.py` to perform lda on the top 20,000 words/tokens of the vocabulary
