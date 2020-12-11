@@ -19,8 +19,8 @@ Author hardware configuration:
     Memory:     16 GB 1600 MHz DDR3
 
 !!! before running this file: 
-    - run importData.py and uncomment line 142 to generate content_list
-    - if encounter error due to exceeding memory, please add the provided ./utils/content_list.npy to folder npy 
+    - run importData.py and uncomment line 145 to generate content_list
+    - this file will take at least 11GB in storage data. please consider carefully before running
 
 *** ONLY RUN THIS FILE IF YOU WANT TO SEE THE TF-IDF TABLES IN CSV FORMAT ***
 """
