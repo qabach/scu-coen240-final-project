@@ -22,13 +22,20 @@ import numpy as np
 from sklearn.cluster import KMeans
 import matplotlib.pyplot as plt
 from sklearn.decomposition import PCA
+from sklearn.datasets import fetch_20newsgroups
+
 
 if __name__ == '__main__':
     
     # create the directory/folder if not yet exist
     if not os.path.exists('./KMeans/'):
         os.makedirs('./KMeans/')
-           
+    
+     # load data 
+    newsgroups_train = fetch_20newsgroups(subset='train', shuffle = True)    
+    print('Dataset loaded...')
+    print('...')    
+    
     # import topic distibution by lda-tfidf 
     topic_dist = np.load('./npy/lda_tfidf_topic_distribution_20k.npy')
     print('...')
@@ -51,8 +58,15 @@ if __name__ == '__main__':
     #PCA
     pca = PCA(n_components=2).fit(new_array)
     datapoint = pca.transform(new_array)
+    
+    color_list = ['#e6194b', '#3cb44b', '#ffe119', '#4363d8', '#f58231', '#911eb4', '#46f0f0', '#f032e6', '#bcf60c', '#fabebe', '#008080', '#e6beff', '#9a6324', '#fffac8', '#800000', '#aaffc3', '#808000', '#ffd8b1', '#000075', '#808080', '#ffffff', '#000000']
+    
+    colors = []
+    for i in range(0,len(datapoint)):
+        colors.append(color_list[newsgroups_train.target[i]])
+        
     plt.figure
-    plt.scatter(datapoint[:, 0], datapoint[:, 1], c='DarkBlue')
+    plt.scatter(datapoint[:, 0], datapoint[:, 1], marker='o', s=20,c=colors)
 
     # plot the centroids
     plt.scatter(
